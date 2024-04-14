@@ -36,18 +36,14 @@ server.get('/alunos', (req, res) => {
     res.json(alunos);
 });
 
-// Rota para obter o aluno com o ID 1
+// Rota para obter o aluno com o ID especificado
 server.get('/alunos/:id', (req, res) => {
     const id = req.params.id;
-    if (id === '1') {
-        const aluno = alunos.find(aluno => aluno.id === 1);
-        if (aluno) {
-            res.json(aluno);
-        } else {
-            res.status(404).json({ mensagem: "Aluno não encontrado" });
-        }
+    const aluno = alunos.find(aluno => aluno.id === parseInt(id));
+    if (aluno) {
+        res.json(aluno);
     } else {
-        res.status(404).json({ mensagem: "Rota inválida" });
+        res.status(404).json({ mensagem: "Aluno não encontrado" });
     }
 });
 
